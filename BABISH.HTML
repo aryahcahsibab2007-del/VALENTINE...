@@ -1,0 +1,128 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Surprise ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ff5f9e, #ffc371);
+        font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
+    }
+
+    .box {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        animation: pop 1s ease;
+    }
+
+    @keyframes pop {
+        0% { transform: scale(0.5); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+        color: #ff2e63;
+        margin-bottom: 30px;
+    }
+
+    button {
+        padding: 12px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #yes {
+        background: #ff2e63;
+        color: white;
+        margin-right: 20px;
+    }
+
+    #yes:hover {
+        transform: scale(1.1);
+    }
+
+    #no {
+        background: #444;
+        color: white;
+        position: absolute;
+    }
+
+    .hearts {
+        position: fixed;
+        top: -10px;
+       font-size: 24px;
+        animation: fall 5s linear infinite;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box" id="box">
+    <h1 id="text">Do you love me or not? 💕</h1>
+    <button id="yes">YES ❤️</button>
+    <button id="no">NO 😜</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const text = document.getElementById("text");
+const box = document.getElementById("box");
+
+// Move NO button every time she tries to click
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+// YES clicked
+yesBtn.addEventListener("click", () => {
+    box.innerHTML = `
+        <h1>💖 I LOVE YOU 💖</h1>
+        <h2>Happy Valentine’s Day<br>My Love ❤️</h2>
+    `;
+    createHearts();
+});
+
+// Heart rain effect
+function createHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "hearts";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }, 200);
+}
+</script>
+
+</body>
+</html>
